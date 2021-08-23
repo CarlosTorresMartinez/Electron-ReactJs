@@ -1,28 +1,32 @@
 {
-  "name": "electron-react-boilerplate",
+  "name": "ventas",
   "homepage": "./",
-  "main": "./electron/main.js",
-  "version": "0.1.0",
+  "main": "public/electron.js",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "concurrently": "^6.2.1",
-    "electron-builder": "^22.11.7",
+    "cross-env": "^7.0.3",
     "electron-is-dev": "^2.0.0",
+    "electron-packager": "^15.3.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
     "wait-on": "^6.0.0"
   },
-  "scripts": {
-    "dev": "concurrently \"npm start\" \"wait-on http://localhost:3000 && electron .\"",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "ebuild": "npm run build && node_modules/.bin/build"
+  "devDependencies": {
+    "electron": "^13.2.1",
+    "electron-builder": "^22.11.7"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "scripts": {
+    "react-start": "react-scripts start",
+    "react-build": "react-scripts build",
+    "react-test": "react-scripts test --env=jsdom",
+    "react-eject": "react-scripts eject",
+    "electron-build": "electron-builder",
+    "release": "npm run react-build && electron-builder --publish=always",
+    "build": "npm run react-build && npm run electron-build",
+    "start": "concurrently \"cross-env BROWSER=none npm run react-start\" \"wait-on http://localhost:3000 && electron .\""
   },
   "browserslist": {
     "production": [
@@ -36,8 +40,5 @@
       "last 1 safari version",
       "last 1 edge version"
     ]
-  },
-  "devDependencies": {
-    "electron": "^13.2.1"
   }
 }

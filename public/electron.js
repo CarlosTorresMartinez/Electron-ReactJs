@@ -7,6 +7,12 @@ let mainWindow;
 function createWindow() {
   mainWindow = new BrowserWindow({
     show: false,
+    webPreferences: {
+      contextIsolation: false,
+      nodeIntegration: true,
+      nodeIntegrationInWorker: true,
+      enableRemoteModule: true,
+    },
   });
   mainWindow.maximize();
 
@@ -15,7 +21,6 @@ function createWindow() {
     : `file://${path.join(__dirname, "../build/index.html")}`;
 
   mainWindow.loadURL(startURL);
-
   mainWindow.once("ready-to-show", () => mainWindow.show());
   mainWindow.on("closed", () => {
     mainWindow = null;
