@@ -1,5 +1,5 @@
 {
-  "name": "ventas",
+  "name": "electron-reactjs",
   "homepage": "./",
   "main": "public/electron.js",
   "version": "1.0.0",
